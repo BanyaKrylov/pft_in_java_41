@@ -70,6 +70,14 @@ public class ContactHelper extends HelperBase {
     returnHomePage();
   }
 
+  public void modifyContact(int index, ContactData contact) {
+    selectContact(index);
+    initContactModification(index);
+    fillContact(contact, false);
+    submitContactModification();
+    returnHomePage();
+  }
+
   public void returnHomePage() {
     click(By.linkText("home page"));
   }
