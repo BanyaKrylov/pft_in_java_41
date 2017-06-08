@@ -22,7 +22,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withLastNAme(String lastNAme) {
+  public ContactData withLastName(String lastNAme) {
     this.lastNAme = lastNAme;
     return this;
   }
@@ -69,13 +69,15 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != that.id) return false;
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
     return lastNAme != null ? lastNAme.equals(that.lastNAme) : that.lastNAme == null;
   }
 
   @Override
   public int hashCode() {
-    int result = firstName != null ? firstName.hashCode() : 0;
+    int result = id;
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastNAme != null ? lastNAme.hashCode() : 0);
     return result;
   }
