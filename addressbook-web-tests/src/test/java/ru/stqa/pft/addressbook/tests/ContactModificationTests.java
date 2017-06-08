@@ -17,7 +17,7 @@ public class ContactModificationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactData("Ivan", "Krylov", "Moscow", "896512354", "test1"), true);
+      app.contact().create(new ContactData().withFirstName("Ivan").withLastNAme("Krylov").withGroup("test1"), true);
     }
   }
 
@@ -25,7 +25,9 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(), "Ivanni", "Rubinni", "Moscow", "896512354", null);
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId()).withFirstName("Ivanni").withLastNAme("Rubinni")
+            .withAddress("Moscow").withMobile("896512354");
     app.contact().modify(index, contact);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());
