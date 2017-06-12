@@ -93,6 +93,7 @@ public class ContactData {
     if (id != that.id) return false;
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
     if (lastNAme != null ? !lastNAme.equals(that.lastNAme) : that.lastNAme != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
     if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
     if (group != null ? !group.equals(that.group) : that.group != null) return false;
     if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
@@ -104,6 +105,7 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastNAme != null ? lastNAme.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
     result = 31 * result + (group != null ? group.hashCode() : 0);
     result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
@@ -117,6 +119,7 @@ public class ContactData {
             "id=" + id +
             ", firstName='" + firstName + '\'' +
             ", lastNAme='" + lastNAme + '\'' +
+            ", address='" + address + '\'' +
             ", mobile='" + mobile + '\'' +
             ", group='" + group + '\'' +
             ", homePhone='" + homePhone + '\'' +
