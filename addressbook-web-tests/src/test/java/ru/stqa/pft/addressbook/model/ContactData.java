@@ -145,7 +145,6 @@ public class ContactData {
     if (lastNAme != null ? !lastNAme.equals(that.lastNAme) : that.lastNAme != null) return false;
     if (address != null ? !address.equals(that.address) : that.address != null) return false;
     if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
-    if (group != null ? !group.equals(that.group) : that.group != null) return false;
     if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
     if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
     if (email != null ? !email.equals(that.email) : that.email != null) return false;
@@ -160,7 +159,6 @@ public class ContactData {
     result = 31 * result + (lastNAme != null ? lastNAme.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
     result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
     result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
     result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
@@ -177,7 +175,6 @@ public class ContactData {
             ", lastNAme='" + lastNAme + '\'' +
             ", address='" + address + '\'' +
             ", mobile='" + mobile + '\'' +
-            ", group='" + group + '\'' +
             ", homePhone='" + homePhone + '\'' +
             ", workPhone='" + workPhone + '\'' +
             ", email='" + email + '\'' +
