@@ -10,7 +10,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 /**
  * Created by ivan8 on 12.06.2017.
  */
-public class ContactAddressTests extends TestBase {
+public class ContactEmailTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -18,15 +18,18 @@ public class ContactAddressTests extends TestBase {
     if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData().withFirstName("Ivan").withLastName("Krylov").withAddress("г. Москва, 4-й" +
               " Вятский пер., д. 18к2, кв. 74").withGroup("test1")
-              .withHomePhone("222").withMobile("111").withWorkPhone("555"), true);
+              .withHomePhone("222").withMobile("111").withWorkPhone("555").withEmail("ivan@me.com").withEmail2
+                      ("ivan123@com.ru").withEmail3("ivanivan@ru.com"), true);
     }
   }
 
   @Test
-  public void testAddresses() {
+  public void testEmails() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-    assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+    assertThat(contact.getEmail(), equalTo(contactInfoFromEditForm.getEmail()));
+    assertThat(contact.getEmail2(), equalTo(contactInfoFromEditForm.getEmail2()));
+    assertThat(contact.getEmail3(), equalTo(contactInfoFromEditForm.getEmail3()));
   }
 }

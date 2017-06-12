@@ -9,6 +9,9 @@ public class ContactData {
   private String group;
   private String homePhone;
   private String workPhone;
+  private String email;
+  private String email2;
+  private String email3;
 
   public int getId() {
     return id;
@@ -50,6 +53,21 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
   public ContactData withGroup(String group) {
     this.group = group;
     return this;
@@ -79,6 +97,18 @@ public class ContactData {
     return workPhone;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
   public String getGroup() {
     return group;
   }
@@ -97,7 +127,10 @@ public class ContactData {
     if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
     if (group != null ? !group.equals(that.group) : that.group != null) return false;
     if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
-    return workPhone != null ? workPhone.equals(that.workPhone) : that.workPhone == null;
+    if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
+    if (email != null ? !email.equals(that.email) : that.email != null) return false;
+    if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+    return email3 != null ? email3.equals(that.email3) : that.email3 == null;
   }
 
   @Override
@@ -110,6 +143,9 @@ public class ContactData {
     result = 31 * result + (group != null ? group.hashCode() : 0);
     result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
     result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
+    result = 31 * result + (email != null ? email.hashCode() : 0);
+    result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+    result = 31 * result + (email3 != null ? email3.hashCode() : 0);
     return result;
   }
 
@@ -124,6 +160,9 @@ public class ContactData {
             ", group='" + group + '\'' +
             ", homePhone='" + homePhone + '\'' +
             ", workPhone='" + workPhone + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
             '}';
   }
 
