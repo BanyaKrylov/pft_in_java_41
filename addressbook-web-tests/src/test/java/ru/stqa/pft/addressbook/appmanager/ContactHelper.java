@@ -116,11 +116,10 @@ public class ContactHelper extends HelperBase {
       String firstname = locator.get(2).getText();
       String lastname = locator.get(1).getText();
       String address = locator.get(3).getText();
-      String[] phones = locator.get(5).getText().split("\n");
-      String[] emails = locator.get(4).getText().split("\n");
+      String allPhones = locator.get(5).getText();
+      String allEmails = locator.get(4).getText();
       contactCache.add(new ContactData().withId(id).withFirstName(firstname).
-              withLastName(lastname).withAddress(address).withHomePhone(phones[0]).withMobile(phones[1]).withWorkPhone
-              (phones[2]).withEmail(emails[0]).withEmail2(emails[1]).withEmail3(emails[2]));
+              withLastName(lastname).withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
     }
     return new Contacts(contactCache);
   }
