@@ -101,7 +101,7 @@ public class ContactData {
     return firstName;
   }
 
-  public String getLastNAme() {
+  public String getLastName() {
     return lastNAme;
   }
 
