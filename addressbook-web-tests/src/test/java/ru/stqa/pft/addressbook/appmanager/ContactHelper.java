@@ -32,6 +32,9 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("work"), contactData.getWorkPhone());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
 
 
     if (creation) {
@@ -117,10 +120,10 @@ public class ContactHelper extends HelperBase {
       String firstname = locator.get(2).getText();
       String lastname = locator.get(1).getText();
       String address = locator.get(3).getText();
-      String allPhones = locator.get(5).getText();
       String allEmails = locator.get(4).getText();
+      String allPhones = locator.get(5).getText();
       contactCache.add(new ContactData().withId(id).withFirstName(firstname).
-              withLastName(lastname).withAddress(address).withAllPhones(allPhones).withAllEmails(allEmails));
+              withLastName(lastname).withAddress(address).withAllEmails(allEmails).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
