@@ -45,7 +45,7 @@ public class ContactCreationTests extends TestBase {
       while (line != null) {
         String[] split = line.split(";");
         list.add(new Object[]{new ContactData().withFirstName(split[0]).withLastName(split[1]).withPhoto(photo).withAddress
-                (split[2]).withMobile(split[3]).withEmail(split[4]).withGroup("test1")});
+                (split[2]).withMobile(split[3]).withEmail(split[4]).withGroup("test 1")});
         line = reader.readLine();
       }
       return list.iterator();
@@ -55,22 +55,22 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "validContactFromXML")
   public void testContactCreation(ContactData contact) {
     app.goTo().homePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create((contact.withAllPhones(ContactPhoneTests.mergePhones(contact)).withAllEmails
             (ContactEmailTests.mergeEmails(contact))), true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
   @Test
   public void testBadContactCreation() {
     app.goTo().homePage();
-    Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withFirstName("Ivan'").withLastName("Krylov").withGroup("test1");
+    Contacts before = app.db().contacts();
+    ContactData contact = new ContactData().withFirstName("Ivan'").withLastName("Krylov").withGroup("test 1");
     app.contact().create((contact), true);
     assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before));
   }
 
