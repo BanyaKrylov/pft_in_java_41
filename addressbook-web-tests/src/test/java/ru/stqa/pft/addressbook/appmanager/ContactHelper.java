@@ -38,9 +38,13 @@ public class ContactHelper extends HelperBase {
 
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next
+                ().getName());
+      } else {
+        Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }
     }
   }
 
@@ -104,9 +108,7 @@ public class ContactHelper extends HelperBase {
 
   public int count() {
     return wd.findElements(By.name("selected[]")).size();
-  }
-
-  private Contacts contactCache = null;
+  }  private Contacts contactCache = null;
 
   public Contacts all() {
     if (contactCache != null) {

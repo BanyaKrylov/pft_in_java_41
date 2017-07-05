@@ -17,7 +17,7 @@ public class ContactAddressTests extends TestBase {
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
       app.contact().create(new ContactData().withFirstName("Ivan").withLastName("Krylov").withAddress("г. Москва, 4-й" +
-              " Вятский пер., д. 18к2, кв. 74").withGroup("test1")
+              " Вятский пер., д. 18к2, кв. 74")
               .withHomePhone("222").withMobile("111").withWorkPhone("555"), true);
     }
   }

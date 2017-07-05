@@ -5,6 +5,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,7 +46,7 @@ public class ContactCreationTests extends TestBase {
       while (line != null) {
         String[] split = line.split(";");
         list.add(new Object[]{new ContactData().withFirstName(split[0]).withLastName(split[1]).withPhoto(photo).withAddress
-                (split[2]).withMobile(split[3]).withEmail(split[4]).withGroup("test 1")});
+                (split[2]).withMobile(split[3]).withEmail(split[4])});
         line = reader.readLine();
       }
       return list.iterator();
@@ -54,10 +55,12 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactFromXML")
   public void testContactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
+    ContactData newContact = new ContactData().withAllPhones(ContactPhoneTests.mergePhones(contact)).withAllEmails
+            (ContactEmailTests.mergeEmails(contact)).inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();
-    app.contact().create((contact.withAllPhones(ContactPhoneTests.mergePhones(contact)).withAllEmails
-            (ContactEmailTests.mergeEmails(contact))), true);
+    app.contact().create(newContact, true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
@@ -68,7 +71,7 @@ public class ContactCreationTests extends TestBase {
   public void testBadContactCreation() {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
-    ContactData contact = new ContactData().withFirstName("Ivan'").withLastName("Krylov").withGroup("test 1");
+    ContactData contact = new ContactData().withFirstName("Ivan'").withLastName("Krylov");
     app.contact().create((contact), true);
     assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.db().contacts();

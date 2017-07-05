@@ -23,7 +23,7 @@ public class ContactPhoneTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().homePage();
     if (app.contact().all().size() == 0) {
-      app.contact().create(new ContactData().withFirstName("Ivan").withLastName("Krylov").withGroup("test1").withHomePhone("222").withMobile("111").withWorkPhone("555"), true);
+      app.contact().create(new ContactData().withFirstName("Ivan").withLastName("Krylov").withHomePhone("222").withMobile("111").withWorkPhone("555"), true);
     }
   }
 
