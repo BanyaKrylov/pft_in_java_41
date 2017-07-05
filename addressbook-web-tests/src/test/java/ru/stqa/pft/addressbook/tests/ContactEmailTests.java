@@ -15,6 +15,11 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
  */
 public class ContactEmailTests extends TestBase {
 
+  public static String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream().filter((s) -> s != null && !s
+            .equals("")).collect(Collectors.joining("\n"));
+  }
+
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
@@ -32,10 +37,5 @@ public class ContactEmailTests extends TestBase {
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
     assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
-  }
-
-  public static String mergeEmails(ContactData contact) {
-    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream().filter((s) -> s != null && !s
-            .equals("")).collect(Collectors.joining("\n"));
   }
 }

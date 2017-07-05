@@ -56,7 +56,7 @@ public class ContactDataGenerator {
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData().withFirstName(String.format("first_name %s", i)).withLastName(String.format
               ("last_name %s", i)).withPhoto(new File("src/test/resources/stru.png"))
-              .withAddress(String.format("address %s", i)).withMobile(String.format("mobile %s",i)).withEmail(String
+              .withAddress(String.format("address %s", i)).withMobile(String.format("mobile %s", i)).withEmail(String
                       .format("email %s", i)));
     }
     return contacts;

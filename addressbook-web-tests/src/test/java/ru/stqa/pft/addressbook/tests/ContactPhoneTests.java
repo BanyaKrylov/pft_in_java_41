@@ -19,6 +19,11 @@ public class ContactPhoneTests extends TestBase {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 
+  public static String mergePhones(ContactData contact) {
+    return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).stream().filter(
+            (s) -> s != null && !s.equals("")).map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
+  }
+
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
@@ -34,10 +39,5 @@ public class ContactPhoneTests extends TestBase {
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-  }
-
-  public static String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).stream().filter(
-            (s) -> s != null && !s.equals("")).map(ContactPhoneTests::cleaned).collect(Collectors.joining("\n"));
   }
 }
