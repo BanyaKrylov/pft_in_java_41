@@ -56,11 +56,9 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "validContactFromXML")
   public void testContactCreation(ContactData contact) {
     Groups groups = app.db().groups();
-    ContactData newContact = new ContactData().withAllPhones(ContactPhoneTests.mergePhones(contact)).withAllEmails
-            (ContactEmailTests.mergeEmails(contact)).inGroup(groups.iterator().next());
     app.goTo().homePage();
     Contacts before = app.db().contacts();
-    app.contact().create(newContact, true);
+    app.contact().create(contact.inGroup(groups.iterator().next()), true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
