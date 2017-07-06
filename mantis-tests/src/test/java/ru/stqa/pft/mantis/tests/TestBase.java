@@ -22,7 +22,8 @@ public class TestBase {
   @BeforeSuite
   public void setUp() throws Exception {
     app.init();
-    app.ftp().upload(new File("C:/xampp/htdocs/mantisbt-1.3.11/config/config_inc.php"), "config_inc.php", "config_inc.php.bak");
+    app.ftp().upload(new File("src/test/resources/config_inc.php"), "config_inc.php",
+            "config_inc.php.bak");
   }
 
   @AfterSuite
@@ -36,13 +37,4 @@ public class TestBase {
     VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
     return regex.getText(mailMessage.text);
   }
-
-  /*@Test
-  public void testCurrentDir() {
-    File currentDir = new File(".");
-    System.out.println(currentDir.getAbsolutePath());
-    File photo = new File("C:/xampp/htdocs/mantisbt-1.3.11/config/config_inc.php");
-    System.out.println(photo.getAbsolutePath());
-    System.out.println(photo.exists());
-  }*/
 }
