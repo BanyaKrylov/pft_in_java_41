@@ -22,13 +22,14 @@ public class ResetPasswordTests extends TestBase {
 
   @Test
   public void testResetPassword() throws IOException, MessagingException {
-    String username = "user1499329548671";
+    String username = app.userHelper().getUserName();;
+    String email = username+"@localhost.localdomain";
     app.resetPassword().login("administrator", "root");
 
     app.resetPassword().selectUser(username);
     app.resetPassword().reset();
     List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
-    String confirmationLink = findConfirmationLink(mailMessages, "user1499329548671@localhost.localdomain");
+    String confirmationLink = findConfirmationLink(mailMessages, email);
     String newPassword = String.valueOf(System.currentTimeMillis());
     app.resetPassword().update(confirmationLink, newPassword);
     assertTrue(app.newSession().login(username, newPassword));
